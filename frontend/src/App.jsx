@@ -4,13 +4,14 @@ import ChatBox from "./components/ChatBox";
 import Credits from "./pages/Credits";
 import Community from "./pages/Community";
 import { Route, Routes } from "react-router-dom";
+import {AppContextProvider} from "./context/AppContext"
 
 const App = () => {
   return (
     <>
       <div className="dark:bg-gradient-to-b from-[#242124] to-[#000000] dark:text-white">
         <div className="flex h-screen w-screen">
-          <SideBar />
+          <SideBar/>
           <Routes>
             <Route path="/" element={<ChatBox />} />
             <Route path="/credits" element={<Credits />} />

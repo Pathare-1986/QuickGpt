@@ -9,7 +9,11 @@ const SideBar = ({ isMenuOpen, setIsMenuOpen }) => {
   const [search, setSearch] = useState("");
 
   return (
-    <div className={`flex flex-col h-screen min-w-72 p-5 dark:bg-gradient-to-b from-[#242124]/30 to-[#000000]/30 border-r border-[#80609F]/30 backdrop-blur-3xl transition-all duration-500 max-md:absolute left-0 z-1 ${!isMenuOpen && "max-md:-translate-x-full"}`}>
+    <div
+      className={`flex flex-col h-screen min-w-72 p-5 dark:bg-gradient-to-b from-[#242124]/30 to-[#000000]/30 border-r border-[#80609F]/30 backdrop-blur-3xl transition-all duration-500 max-md:absolute left-0 z-1 ${
+        !isMenuOpen && "max-md:-translate-x-full"
+      }`}
+    >
       {/* Logo */}
       <img
         src={theme === "dark" ? assets.logo_full : assets.logo_full_dark}
@@ -47,7 +51,7 @@ const SideBar = ({ isMenuOpen, setIsMenuOpen }) => {
           .map((item, index) => (
             <div
               key={item._id}
-              onClick={()=>{
+              onClick={() => {
                 navigate("/");
                 setSelectedChats(item);
                 setIsMenuOpen(false);
@@ -74,7 +78,10 @@ const SideBar = ({ isMenuOpen, setIsMenuOpen }) => {
 
       {/* community image */}
       <div
-        onClick={() => {navigate("/community");setIsMenuOpen(false)}}
+        onClick={() => {
+          navigate("/community");
+          setIsMenuOpen(false);
+        }}
         className="flex items-center gap-2 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md cursor-pointer hover:scale-103 transition-all"
       >
         <img src={assets.gallery_icon} className="w-3.5 invert dark:invert-0" />
@@ -85,7 +92,10 @@ const SideBar = ({ isMenuOpen, setIsMenuOpen }) => {
 
       {/* Credit Purchases Options */}
       <div
-        onClick={() => {navigate("/credits");setIsMenuOpen(false)}}
+        onClick={() => {
+          navigate("/credits");
+          setIsMenuOpen(false);
+        }}
         className="flex items-center gap-2 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md cursor-pointer hover:scale-103 transition-all"
       >
         <img src={assets.diamond_icon} className="w-3.5 dark:invert" />

@@ -2,6 +2,8 @@
 
 A full-stack AI chat application that supports both text and image generation, built with React and Node.js. Features a modern UI with dark/light mode, credit-based payment system, and community image sharing.
 
+🌐 **Live Demo**: [https://quick-gpt-nu.vercel.app/](https://quick-gpt-nu.vercel.app/)
+
 ## 🚀 Features
 
 - **Dual AI Modes**: Text chat and AI image generation
@@ -123,6 +125,8 @@ QuickGpt/
 3. **Open your browser**
    Navigate to `http://localhost:5173`
 
+   Or visit the live demo: [https://quick-gpt-nu.vercel.app/](https://quick-gpt-nu.vercel.app/)
+
 ## 📱 Usage
 
 ### Getting Started
@@ -231,6 +235,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For support, email support@quickgpt.com or create an issue in the repository.
+
+## 🔗 Links
+
+- **Live Demo**: [https://quick-gpt-nu.vercel.app/](https://quick-gpt-nu.vercel.app/)
+- **Repository**: [GitHub Repository](https://github.com/yourusername/QuickGpt)
 
 ---
 

@@ -13,7 +13,7 @@ const port = process.env.PORT || 8080
 await connectDB()
 
 // stripe webhook
-app.post("/api/stripe",express.row({type:"application/json"}),
+app.post("/api/stripe",express.raw({type:"application/json"}),
 stripeWebHooks)
 
 //Middleware

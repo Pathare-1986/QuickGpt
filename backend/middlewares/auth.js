@@ -5,7 +5,7 @@ export const protect = async (req,res,next)=>{
     let token = req.headers.authorization;
 
     try {
-        const decoded = jsonwebtoken.verify(token,process.env.JWT.SECRET)
+        const decoded = jsonwebtoken.verify(token,process.env.JWT_SECRET)
         const userId = decoded.id;
 
         const user = await User.findById(userId)

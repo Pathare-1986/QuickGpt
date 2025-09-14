@@ -2,26 +2,66 @@ import { useEffect, useRef, useState } from "react";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 import Message from "./Message";
+import toast from "react-hot-toast";
 
 const ChatBox = () => {
   const containerRef = useRef(null);
 
-  const { selectedChats, theme } = useAppContext();
+  const { selectedChats, theme, user, axios, token, setUser } = useAppContext();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [promt, setPromt] = useState("");
+  const [prompt, setPrompt] = useState("");
   const [mode, setMode] = useState("text");
   const [isPublished, setIsPublished] = useState(false);
 
   const onSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+      if (!user) return toast("Login to send Message");
+      setLoading(true);
+
+      const promptCopy = prompt;
+      setPrompt("");
+
+      setMessages((prev) => [
+        ...prev,
+        { role: "user", content: promptCopy, timestamp: Date.now(), isImage: false },
+      ]);
+
+      const { data } = await axios.post(
+        `/api/message/${mode}`,
+        { chatId: selectedChats._id, prompt, isPublished },
+        { headers: { Authorization: token } }
+      );
+      console.log("Backend response:", data);
+
+      if(data.success){
+        setMessages(prev=>[...prev,data.reply])
+        // decrease credits
+        if(mode=="image"){
+          setUser(prev=>({...prev,credits:prev.credits-2}))
+        }else{
+          setUser(prev=>({...prev,credits:prev.credits-1}))
+        }
+      }else{
+        toast.error(data.message)
+        setPrompt(promptCopy)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+    finally{
+      setPrompt("")
+      setLoading(false)
+    }
   };
 
   useEffect(() => {
-    if (selectedChats) {
-      setMessages(selectedChats.messages);
-    }
-  }, [selectedChats]);
+  if (selectedChats && selectedChats.messages) {
+    setMessages([...selectedChats.messages]);
+  }
+}, [selectedChats?._id]);
+
 
   useEffect(() => {
     if (containerRef.current) {
@@ -91,8 +131,8 @@ const ChatBox = () => {
           </option>
         </select>
         <input
-          onChange={(e) => setPromt(e.target.value)}
-          value={promt}
+          onChange={(e) => setPrompt(e.target.value)}
+          value={prompt}
           type="text"
           placeholder="Type your prompt here...."
           className="flex-1 w-full text-sm outline-none bg-transparent"

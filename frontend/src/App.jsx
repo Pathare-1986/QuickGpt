@@ -9,19 +9,21 @@ import { assets } from "./assets/assets";
 import "./assets/prism.css";
 import Loading from "./pages/Loading";
 import Login from "./pages/Login";
+import {Toaster} from "react-hot-toast"
 
 const App = () => {
-  const { user } = useAppContext();
+  const { user,loadingUser } = useAppContext();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
 
-  if (pathname === "/loading") {
+  if (pathname === "/loading" || loadingUser) {
     return <Loading />;
   }
 
   return (
     <>
+    <Toaster/>
       {!isMenuOpen && (
         <img
           src={assets.menu_icon}

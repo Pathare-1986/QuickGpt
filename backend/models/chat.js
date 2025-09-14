@@ -1,4 +1,4 @@
-import mongoose, { BaseCollection } from 'mongoose';
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const chatSchema = new Schema({
